@@ -111,12 +111,11 @@ class ArticleRepository
      * @param  string $key
      * @return collection
      */
-    public function search($key)
+    public function search($ids)
     {
-        $key = trim($key);
 
         return $this->model
-                    ->where('title', 'like', "%{$key}%")
+                    ->whereIn('id',$ids)
                     ->orderBy('published_at', 'desc')
                     ->get();
 

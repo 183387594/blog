@@ -250,7 +250,7 @@ class BaseManager
                 'size' => human_filesize($file->getClientSize()),
                 'real_path' => $realPath,
                 'relative_url' => "storage/$realPath",
-                'url' => asset("storage/$realPath"),
+                'url' => 'http://or0z8sgc6.bkt.clouddn.com/'.$realPath,
         ];
     }
 

@@ -7,7 +7,7 @@ use League\Fractal\Resource\Item;
 use App\Http\Controllers\Controller;
 use League\Fractal\Resource\Collection;
 use League\Fractal\Pagination\IlluminatePaginatorAdapter;
-
+use XS;
 class ApiController extends Controller
 {
     /**

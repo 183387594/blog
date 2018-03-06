@@ -68,7 +68,6 @@ class UploadController extends ApiController
     public function fileUpload(ImageRequest $request)
     {
         $strategy = $request->get('strategy', 'images');
-
         if (!$request->hasFile('image')) {
             return $this->respondWithArray([
                 'success' => false,
@@ -79,7 +78,6 @@ class UploadController extends ApiController
         $path = $strategy . '/' . date('Y') . '/' . date('m') . '/' . date('d');
 
         $result = $this->manager->store($request->file('image'), $path);
-
         return $this->respondWithArray($result);
     }
 

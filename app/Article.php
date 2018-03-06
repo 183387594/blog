@@ -121,7 +121,16 @@ class Article extends Model
         $this->attributes['title'] = $value;
 
         if (!config('services.youdao.key') || !config('services.youdao.from')) {
-            $this->setUniqueSlug($value, '');
+            $q=$value;
+            $from="auto";
+            $to = "EN";
+            $appKey = "3ffa18a09afb81c9";
+            $salt = rand(1,100);
+            $sign = md5($appKey.$q.$salt.config('services.youdao.key'));
+            $url = "http://openapi.youdao.com/api?q={$q}&from={$from}&to={$to}&appKey={$appKey}&salt={$salt}&sign={$sign}";
+            $arr = json_decode(file_get_contents($url),true);
+            $this->attributes['slug'] = str_replace(" ","-",$arr['translation'][0]);
+            //$this->setUniqueSlug($value, '');
         } else {
             $this->attributes['slug'] = translug($value);
         }

@@ -8,6 +8,7 @@ use Illuminate\Support\ServiceProvider;
 use App\Services\FileManager\BaseManager;
 use App\Services\FileManager\UpyunManager;
 use Illuminate\Database\Eloquent\Relations\Relation;
+use Illuminate\Support\Facades\Schema;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -18,6 +19,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+	Schema::defaultStringLength(191);
         $lang = config('app.locale') != 'zh_cn' ? config('app.locale') : 'zh';
         \Carbon\Carbon::setLocale($lang);
 

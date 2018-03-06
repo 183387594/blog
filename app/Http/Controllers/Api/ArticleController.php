@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\ArticleRequest;
 use App\Repositories\ArticleRepository;
 use App\Transformers\ArticleTransformer;
+use App\Xunsearch;
 
 class ArticleController extends ApiController
 {
@@ -44,7 +45,23 @@ class ArticleController extends ApiController
         $data['is_draft']    = isset($data['is_draft']);
         $data['is_original'] = isset($data['is_original']);
 
-        $this->article->store($data);
+
+
+        $art = $this->article->store($data);
+
+        $sou_data = [
+            "pid"=> $art->id,
+            "category_id"=>$data["category_id"],
+            "user_id"=>$data['user_id'],
+            "slug"=>$art->slug,
+            "title"=>$data['title'],
+            "page_image"=>$data['page_image'],
+            "subtitle"=>$data['subtitle'],
+            "meta_description"=>$data['meta_description'],
+            "content"=>$data["content"],
+            "updated_at"=>strtotime($data["published_at"]),
+        ];
+        Xunsearch::add($sou_data);
 
         $this->article->syncTag(json_decode($request->get('tags')));
 
@@ -75,7 +92,20 @@ class ArticleController extends ApiController
             'last_user_id' => \Auth::id()
         ]);
 
-        $this->article->update($id, $data);
+        $art = $this->article->update($id, $data);
+        $sou_data = [
+            "pid"=> $art->id,
+            "category_id"=>$data["category_id"],
+            "user_id"=>$data['last_user_id'],
+            "slug"=>$art->slug,
+            "title"=>$data['title'],
+            "page_image"=>$data['page_image'],
+            "subtitle"=>$data['subtitle'],
+            "meta_description"=>$data['meta_description'],
+            "content"=>$data["content"],
+            "updated_at"=>strtotime($data["published_at"]),
+        ];
+        Xunsearch::edit($sou_data);
 
         $this->article->syncTag(json_decode($request->get('tags')));
 
@@ -91,7 +121,7 @@ class ArticleController extends ApiController
     public function destroy($id)
     {
         $this->article->destroy($id);
-
+        Xunsearch::del($id);
         return $this->noContent();
     }
 }

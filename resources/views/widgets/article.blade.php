@@ -11,14 +11,14 @@
                 <div class="media-body">
                     <h6 class="media-heading">
                         <a href="{{ url($article->slug) }}">
-                            {{ $article->title }}
+                            {!! $article->title !!}
                         </a>
                     </h6>
                     <div class="meta">
-                        <span class="cinema">{{ $article->subtitle }}</span>
+                        <span class="cinema">{!! $article->subtitle !!}</span>
                     </div>
                     <div class="description">
-                        {{ $article->meta_description }}
+                        {!!  $article->meta_description !!}
                     </div>
                     <div class="extra">
                         @foreach($article->tags as $tag)

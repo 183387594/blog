@@ -13,9 +13,12 @@
     <link rel="shortcut icon" href="{{ config('blog.default_icon') }}">
 
     <title>@yield('title', config('app.name'))</title>
-
     <link rel="stylesheet" href="{{ mix('css/home.css') }}">
-
+    <style>
+        em{
+            color: #ff1e00;font-weight:bold;font-style:normal;
+        }
+    </style>
     <!-- Scripts -->
     <script>
         window.Language = '{{ config('app.locale') }}';
@@ -40,7 +43,7 @@
 
     <!-- Scripts -->
     <script src="{{ mix('js/home.js') }}"></script>
-
+    
     @yield('scripts')
 
     <script>

@@ -18,8 +18,10 @@
         "laravel/tinker": "~1.0",
         "league/fractal": "^0.14.0",
         "league/html-to-markdown": "^4.2",
+        "phpvital/pjaxer": "^2.0",
         "predis/predis": "^1.1",
-        "yzalis/identicon": "^1.1"
+        "yzalis/identicon": "^1.1",
+        "zgldh/qiniu-laravel-storage": "^0.6.8"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
@@ -28,7 +30,8 @@
     },
     "autoload": {
         "classmap": [
-            "database"
+            "database",
+	    "app/libs/xunsou/lib/XS.php"
         ],
         "psr-4": {
             "App\\": "app/"

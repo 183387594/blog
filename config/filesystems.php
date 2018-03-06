@@ -15,7 +15,7 @@ return [
     |
     */
 
-    'default' => 'public',
+    'default' => 'qiniu',
 
     /*
     |--------------------------------------------------------------------------
@@ -71,7 +71,19 @@ return [
             'domain'        => env('UPYUN_DOMAIN'),
             'protocol'      => env('UPYUN_PROTOCOL'),
         ],
-
+		'qiniu' => [
+			'driver'  => 'qiniu',
+				'domains' => [
+					'default'   => 'or0z8sgc6.bkt.clouddn.com', //你的七牛域名
+					'https'     => 'dn-yourdomain.qbox.me',         //你的HTTPS域名
+					'custom'    => 'http://or0z8sgc6.bkt.clouddn.com',                //你的自定义域名
+				 ],
+				'access'	=>	'public',
+				'access_key'=> 'Z0Ymca21_ym9ci3Gjiq3hCi2vROOBPNs5zpo6-Zr',  //AccessKey
+				'secret_key'=> 'QoS-tKdqmBN3mdXkWHeFL3qdVjgItfuAmC2XPph2',  //SecretKey
+				'bucket'    => 'blog',  //Bucket名字
+				'notify_url'=> '',  //持久化处理回调地址
+		],
     ],
 
 ];
